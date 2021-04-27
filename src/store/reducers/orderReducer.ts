@@ -12,8 +12,8 @@ type Order = {
 }
 
 interface StateType {
-    orders: Order[],
-    order: Order
+    orders: Order[];
+    order: Order;
 }
 
 const initialState: StateType = {

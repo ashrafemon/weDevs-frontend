@@ -12,47 +12,38 @@ import {
     TableHead,
     TableRow
 } from "@material-ui/core";
-import OpenWithIcon from '@material-ui/icons/OpenWith';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import {useStyles} from "./styled";
 import AdminLayout from "../../Layout";
 import {RootStateOrAny, useDispatch, useSelector} from "react-redux";
-import {
-    deleteAdminProduct,
-    fetchAdminProducts,
-    setAdminProduct,
-    toggleAdminDialog
-} from "../../../../store/actions/admin/products/action";
-import {ProductType} from '../../../../types';
-import ProductDialog from "./ProductDialog";
+import {CategoryType} from '../../../../types';
+import {deleteAdminCategory, fetchAdminCategories} from "../../../../store/actions/admin/category/action";
 import {useHistory} from "react-router-dom";
 
-const Products = () => {
+const Categories = () => {
     const classes = useStyles()
     const history = useHistory()
     const dispatch = useDispatch()
-    const products = useSelector((state: RootStateOrAny) => state.adminProductStore.products)
+
+    const categories = useSelector((state: RootStateOrAny) => state.adminCategoryStore.categories)
 
     useEffect(() => {
-        dispatch(fetchAdminProducts())
+        dispatch(fetchAdminCategories())
     }, [dispatch])
 
-    const quickViewHandler = (id: number) => {
-        dispatch(setAdminProduct(id))
-        dispatch(toggleAdminDialog(true))
-    }
     const editHandler = (id: number) => {
-        history.push(`/admin/products/${id}/edit`)
+        history.push(`/admin/categories/${id}/edit`)
     }
+
     const deleteHandler = (id: number) => {
-        dispatch(deleteAdminProduct(id))
+        dispatch(deleteAdminCategory(id))
     }
 
     return (
         <AdminLayout>
             <Card className={classes.wrapper} elevation={3}>
-                <CardHeader title="Products List"/>
+                <CardHeader title="Category List"/>
                 <CardContent>
                     <TableContainer component={Paper}>
                         <Table size="small">
@@ -60,22 +51,15 @@ const Products = () => {
                                 <TableRow>
                                     <TableCell>No.</TableCell>
                                     <TableCell>Name</TableCell>
-                                    <TableCell>SKU</TableCell>
-                                    <TableCell>Price</TableCell>
                                     <TableCell align="center">Action</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {products.length ? products.map((item: ProductType, index: number) => (
+                                {categories.length ? categories.map((item: CategoryType, index: number) => (
                                     <TableRow key={index}>
                                         <TableCell>{index + 1}</TableCell>
                                         <TableCell>{item.name}</TableCell>
-                                        <TableCell>{item.sku}</TableCell>
-                                        <TableCell>{item.price}</TableCell>
                                         <TableCell align="center">
-                                            <IconButton onClick={quickViewHandler.bind(this, item.id)}>
-                                                <OpenWithIcon/>
-                                            </IconButton>
                                             <IconButton onClick={editHandler.bind(this, item.id)}>
                                                 <EditIcon/>
                                             </IconButton>
@@ -86,7 +70,7 @@ const Products = () => {
                                     </TableRow>
                                 )) : (
                                     <TableRow>
-                                        <TableCell colSpan={5} align="center">No products found...</TableCell>
+                                        <TableCell colSpan={3} align="center">No categories found...</TableCell>
                                     </TableRow>
                                 )}
 
@@ -95,10 +79,8 @@ const Products = () => {
                     </TableContainer>
                 </CardContent>
             </Card>
-
-            <ProductDialog/>
         </AdminLayout>
     )
 }
 
-export default Products
+export default Categories

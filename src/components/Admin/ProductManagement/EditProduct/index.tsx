@@ -6,9 +6,9 @@ import {useStyles} from "./styled";
 import DefaultImage from './../../../../assets/default-image.jpg'
 import {RootStateOrAny, useDispatch, useSelector} from "react-redux";
 import {fetchAdminCategories} from "../../../../store/actions/admin/category/action";
-import {createAdminProduct} from "../../../../store/actions/admin/products/action";
+import {fetchAdminProduct, updateAdminProduct} from "../../../../store/actions/admin/products/action";
 import {toggleNotification} from "../../../../store/actions/auth/action";
-import {useHistory} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 
 type ProductFormType = {
     name: string,
@@ -18,12 +18,18 @@ type ProductFormType = {
     image: string
 }
 
-const CreateProduct = () => {
+type ProductParamType = {
+    id: string
+}
+
+const EditProduct = () => {
     const classes = useStyles()
+    const params = useParams<ProductParamType>()
     const history = useHistory()
     const dispatch = useDispatch()
     const inputRef = useRef<HTMLInputElement>(null)
     const categories = useSelector((state: RootStateOrAny) => state.adminCategoryStore.categories)
+    const product = useSelector((state: RootStateOrAny) => state.adminProductStore.product)
     const [form, setForm] = useState<ProductFormType>({
         name: '',
         price: '',
@@ -33,8 +39,15 @@ const CreateProduct = () => {
     })
 
     useEffect(() => {
-        dispatch(fetchAdminCategories())
-    }, [dispatch])
+        if (params.id) {
+            dispatch(fetchAdminProduct(parseInt(params.id)))
+            dispatch(fetchAdminCategories())
+        }
+    }, [dispatch, params.id])
+
+    useEffect(() => {
+        setForm(product)
+    }, [product])
 
     const inputRefClickHandler = () => {
         inputRef.current?.click()
@@ -54,7 +67,7 @@ const CreateProduct = () => {
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (form.name.length && form.price.length && form.description.length && form.category_id !== '') {
-            dispatch(createAdminProduct(form))
+            dispatch(updateAdminProduct(form))
             history.push('/admin/products')
         } else {
             dispatch(toggleNotification({
@@ -65,11 +78,13 @@ const CreateProduct = () => {
         }
     }
 
+    console.log(form)
+
     return (
         <AdminLayout>
             <Card elevation={3}>
                 <CardHeader
-                    title="Add New Product Item"
+                    title="Edit Product Item"
                     subheader="Please fill up all required field *"
                 />
                 <CardContent>
@@ -140,7 +155,7 @@ const CreateProduct = () => {
                             </Grid>
                         </Grid>
 
-                        <Button fullWidth type="submit" variant="contained" color="primary">Add Product</Button>
+                        <Button fullWidth type="submit" variant="contained" color="primary">Update Product</Button>
                     </form>
                 </CardContent>
             </Card>
@@ -148,4 +163,4 @@ const CreateProduct = () => {
     )
 }
 
-export default CreateProduct
+export default EditProduct

@@ -8,6 +8,7 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 import AddIcon from '@material-ui/icons/Add';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import CategoryIcon from '@material-ui/icons/Category';
 
 const useStyles = makeStyles(theme => ({
     innerListItem: {
@@ -35,6 +36,37 @@ const SideNav = () => {
         >
             <ListItem button onClick={handleClick}>
                 <ListItemIcon>
+                    <CategoryIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Categories"/>
+                {open ? <ExpandLess/> : <ExpandMore/>}
+            </ListItem>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                    <ListItem
+                        className={classes.innerListItem}
+                        button
+                        onClick={() => history.push('/admin/categories')}
+                    >
+                        <ListItemIcon>
+                            <FormatListNumberedIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary="List of Category"/>
+                    </ListItem>
+                    <ListItem
+                        className={classes.innerListItem}
+                        button
+                        onClick={() => history.push('/admin/categories/add')}
+                    >
+                        <ListItemIcon>
+                            <AddIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary="Add New Category"/>
+                    </ListItem>
+                </List>
+            </Collapse>
+            <ListItem button onClick={handleClick}>
+                <ListItemIcon>
                     <StoreIcon/>
                 </ListItemIcon>
                 <ListItemText primary="Products"/>
@@ -50,7 +82,7 @@ const SideNav = () => {
                         <ListItemIcon>
                             <FormatListNumberedIcon/>
                         </ListItemIcon>
-                        <ListItemText primary="List of Products"/>
+                        <ListItemText primary="List of Product"/>
                     </ListItem>
                     <ListItem
                         className={classes.innerListItem}

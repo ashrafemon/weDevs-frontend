@@ -166,4 +166,8 @@ export const useStyles = makeStyles(() => ({
             marginRight: 5
         }
     },
+    notFound: {
+        textAlign: 'center',
+        fontWeight: 600
+    }
 }))

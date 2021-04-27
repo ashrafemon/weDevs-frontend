@@ -1,14 +1,8 @@
-import React, {useState} from "react";
+import React, {useEffect} from "react";
 import {
-    Box,
-    Button,
     Card,
     CardContent,
     CardHeader,
-    Dialog,
-    DialogContent,
-    DialogTitle,
-    Grid,
     IconButton,
     Paper,
     Table,
@@ -16,25 +10,33 @@ import {
     TableCell,
     TableContainer,
     TableHead,
-    TableRow,
-    TextField,
-    Typography
+    TableRow
 } from "@material-ui/core";
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import {useStyles} from "./styled";
 import AdminLayout from "../../Layout";
-import DefaultImage from "../../../../assets/default-image.jpg";
-import {Autocomplete} from "@material-ui/lab";
+import {RootStateOrAny, useDispatch, useSelector} from "react-redux";
+import {deleteAdminOrder, fetchAdminOrders} from "../../../../store/actions/admin/orders/action";
+import {OrderType} from "../../../../types";
+import {useHistory} from "react-router-dom";
 
 const Orders = () => {
     const classes = useStyles()
-    const [statuses] = useState([
-        {title: 'Processing'},
-        {title: 'Shipped'},
-        {title: 'Delivered'},
-    ]);
-    const [showOrder, setShowOrder] = useState<boolean>(false)
+    const history = useHistory()
+    const dispatch = useDispatch()
+    const orders = useSelector((state: RootStateOrAny) => state.adminOrderStore.orders)
+
+    useEffect(() => {
+        dispatch(fetchAdminOrders())
+    }, [dispatch])
+
+    const editHandler = (id: number) => {
+        history.push(`/admin/orders/${id}/edit`)
+    }
+    const deleteHandler = (id: number) => {
+        dispatch(deleteAdminOrder(id))
+    }
 
     return (
         <AdminLayout>
@@ -46,66 +48,42 @@ const Orders = () => {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>No.</TableCell>
-                                    <TableCell>Product</TableCell>
-                                    <TableCell>Username</TableCell>
+                                    <TableCell>Product ID</TableCell>
+                                    <TableCell>User ID</TableCell>
                                     <TableCell>Quantity</TableCell>
+                                    <TableCell>Price</TableCell>
                                     <TableCell>Status</TableCell>
                                     <TableCell align="center">Action</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                <TableRow>
-                                    <TableCell>01</TableCell>
-                                    <TableCell>Tomato</TableCell>
-                                    <TableCell>Ashraf Emon</TableCell>
-                                    <TableCell>10</TableCell>
-                                    <TableCell>Pending</TableCell>
-                                    <TableCell align="center">
-                                        <IconButton onClick={() => setShowOrder(true)}>
-                                            <EditIcon/>
-                                        </IconButton>
-                                        <IconButton>
-                                            <DeleteIcon/>
-                                        </IconButton>
-                                    </TableCell>
-                                </TableRow>
+                                {orders.length ? orders.map((item: OrderType, index: number) => (
+                                    <TableRow key={index}>
+                                        <TableCell>{index + 1}</TableCell>
+                                        <TableCell>{item.product_id}</TableCell>
+                                        <TableCell>{item.user_id}</TableCell>
+                                        <TableCell>{item.quantity}</TableCell>
+                                        <TableCell>{item.price}</TableCell>
+                                        <TableCell>{item.status}</TableCell>
+                                        <TableCell align="center">
+                                            <IconButton onClick={editHandler.bind(this, item.id)}>
+                                                <EditIcon/>
+                                            </IconButton>
+                                            <IconButton onClick={deleteHandler.bind(this, item.id)}>
+                                                <DeleteIcon/>
+                                            </IconButton>
+                                        </TableCell>
+                                    </TableRow>
+                                )) : (
+                                    <TableRow>
+                                        <TableCell colSpan={7} align="center">No orders found...</TableCell>
+                                    </TableRow>
+                                )}
                             </TableBody>
                         </Table>
                     </TableContainer>
                 </CardContent>
             </Card>
-
-            <Dialog className={classes.dialog} open={showOrder} maxWidth="sm" fullWidth
-                    onClose={() => setShowOrder(false)}>
-                <DialogTitle className={classes.dialogTitle}>Order Item</DialogTitle>
-                <DialogContent className={classes.dialogContent}>
-                    <Grid container spacing={1} alignItems="center">
-                        <Grid item sm={4} xs={12}>
-                            <img className={classes.productImage} src={DefaultImage} alt="Default"/>
-                        </Grid>
-                        <Grid item sm={8} xs={12}>
-                            <Typography><strong>Order By:</strong> Ashraf Emon</Typography>
-                            <Typography><strong>Product Name:</strong> Tomato</Typography>
-                            <Typography><strong>SKU:</strong> sfsdkjfhskffk</Typography>
-                            <Typography><strong>Quantity:</strong> 10</Typography>
-                            <Typography><strong>Price:</strong> $12.07</Typography>
-                            <Typography><strong>Category:</strong> Fruits</Typography>
-                            <Box mb={2}>
-                                <Autocomplete
-                                    options={statuses}
-                                    getOptionLabel={(option) => option.title}
-                                    fullWidth
-                                    renderInput={(params) =>
-                                        <TextField {...params} label="Status"/>
-                                    }
-                                />
-                            </Box>
-
-                            <Button variant="contained" color="primary" fullWidth>Update</Button>
-                        </Grid>
-                    </Grid>
-                </DialogContent>
-            </Dialog>
         </AdminLayout>
     )
 }

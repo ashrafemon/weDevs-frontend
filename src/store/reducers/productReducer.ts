@@ -1,46 +1,23 @@
 import * as types from './../actions/products/types'
-
-type Product = {
-    id: number,
-    name: string,
-    sku: string,
-    category: string,
-    price: string,
-    image: string
-}
+import {ProductType} from "../../types";
 
 interface StateType {
-    products: Product[],
-    product: Product
+    products: ProductType[];
+    product: ProductType;
+    showDialog: boolean;
 }
 
 const initialState: StateType = {
-    products: [
-        {
-            id: 1,
-            name: 'Tomato',
-            sku: 'SKUKJDFKFD',
-            category: 'Fruits',
-            price: '100',
-            image: ''
-        },
-        {
-            id: 1,
-            name: 'Apple',
-            sku: 'SKUKJDFKFD',
-            category: 'Fruits',
-            price: '120',
-            image: ''
-        }
-    ],
+    products: [],
     product: {
         id: 0,
         name: '',
         sku: '',
-        category: '',
+        category_id: '',
         price: '',
         image: ''
     },
+    showDialog: false
 }
 
 const productReducer = (state = initialState, action: any) => {
@@ -48,17 +25,17 @@ const productReducer = (state = initialState, action: any) => {
         case types.FETCH_PRODUCTS:
             return {
                 ...state,
-                products: action.payload
+                products: action.payload,
             }
         case types.FETCH_PRODUCT:
             return {
                 ...state,
                 product: action.payload
             }
-        case types.DELETE_PRODUCT:
+        case types.TOGGLE_DIALOG:
             return {
                 ...state,
-                // products: state.products.filter(item => item.id !== action.payload)
+                showDialog: action.payload
             }
         default:
             return state

@@ -17,6 +17,21 @@ const routes = [
         component: React.lazy(() => import('../components/Auth/Register'))
     },
     {
+        path: '/admin/categories',
+        exact: true,
+        component: React.lazy(() => import('../components/Admin/CategoryManagement/Categories'))
+    },
+    {
+        path: '/admin/categories/add',
+        exact: true,
+        component: React.lazy(() => import('../components/Admin/CategoryManagement/CreateCategory'))
+    },
+    {
+        path: '/admin/categories/:id/edit',
+        exact: true,
+        component: React.lazy(() => import('../components/Admin/CategoryManagement/EditCategory'))
+    },
+    {
         path: '/admin/products',
         exact: true,
         component: React.lazy(() => import('../components/Admin/ProductManagement/Products'))
@@ -27,9 +42,19 @@ const routes = [
         component: React.lazy(() => import('../components/Admin/ProductManagement/CreateProduct'))
     },
     {
+        path: '/admin/products/:id/edit',
+        exact: true,
+        component: React.lazy(() => import('../components/Admin/ProductManagement/EditProduct'))
+    },
+    {
         path: '/admin/orders',
         exact: true,
         component: React.lazy(() => import('../components/Admin/OrderManagement/Orders'))
+    },
+    {
+        path: '/admin/orders/:id/edit',
+        exact: true,
+        component: React.lazy(() => import('../components/Admin/OrderManagement/EditOrder'))
     },
     {
         path: '*',
