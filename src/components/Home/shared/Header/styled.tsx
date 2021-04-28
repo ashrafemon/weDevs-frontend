@@ -24,7 +24,9 @@ export const useStyles = makeStyles(() => ({
             textDecoration: 'none',
             color: '#ffffff'
         },
-        // '@media()'
+    },
+    logoutText: {
+        cursor: 'pointer'
     }
 }))
 

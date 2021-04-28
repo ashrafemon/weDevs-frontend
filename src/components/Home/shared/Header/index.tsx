@@ -1,10 +1,19 @@
 import React from "react";
 import {Box, Typography} from "@material-ui/core";
 import {Nav, NavItem, useStyles} from "./styled";
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
+import {useDispatch} from "react-redux";
+import {logout} from "../../../../store/actions/auth/action";
 
 const Header = () => {
     const classes = useStyles()
+    const history = useHistory()
+    const dispatch = useDispatch()
+
+    const logoutHandler = () => {
+        dispatch(logout(() => history.replace('/login')))
+    }
+
     return (
         <Box className={classes.wrapper}>
             <Typography className={classes.brand}>
@@ -12,13 +21,7 @@ const Header = () => {
             </Typography>
             <Nav>
                 <NavItem>
-                    <Link to="/">Products</Link>
-                </NavItem>
-                <NavItem>
-                    <Link to="/">Profile</Link>
-                </NavItem>
-                <NavItem>
-                    <Link to="/">Logout</Link>
+                    <Typography className={classes.logoutText} onClick={logoutHandler}>Logout</Typography>
                 </NavItem>
             </Nav>
         </Box>

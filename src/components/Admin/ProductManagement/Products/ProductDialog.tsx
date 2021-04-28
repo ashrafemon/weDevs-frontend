@@ -29,7 +29,7 @@ const ProductDialog = () => {
                             <Typography><strong>Name:</strong> {product.name}</Typography>
                             <Typography><strong>SKU:</strong> {product.sku}</Typography>
                             <Typography><strong>Price:</strong> {product.price}</Typography>
-                            <Typography><strong>Category:</strong> {product.category_id}</Typography>
+                            <Typography><strong>Category:</strong> {product.category_name} </Typography>
                             <Typography><strong>Description:</strong> {product.description}</Typography>
                         </Grid>
                     </Grid>

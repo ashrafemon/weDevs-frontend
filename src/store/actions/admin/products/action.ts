@@ -39,7 +39,8 @@ export const fetchAdminProduct = (id: number) => (dispatch: Function) => {
         })
         .catch(err => console.log(err))
 }
-export const createAdminProduct = (data: any) => (dispatch: Function) => {
+export const createAdminProduct = (data: any, cb: Function = () => {
+}) => (dispatch: Function) => {
     fetch(api_url + 'admin/products', {
         method: 'POST',
         headers: {
@@ -56,11 +57,13 @@ export const createAdminProduct = (data: any) => (dispatch: Function) => {
                     text: res.message,
                     show: true
                 }))
+                cb()
             }
         })
         .catch(err => console.log(err))
 }
-export const updateAdminProduct = (data: any) => (dispatch: Function) => {
+export const updateAdminProduct = (data: any, cb: Function = () => {
+}) => (dispatch: Function) => {
     fetch(api_url + 'admin/products/edit', {
         method: 'PATCH',
         headers: {
@@ -77,6 +80,7 @@ export const updateAdminProduct = (data: any) => (dispatch: Function) => {
                     text: res.message,
                     show: true
                 }))
+                cb()
             }
         })
         .catch(err => console.log(err))

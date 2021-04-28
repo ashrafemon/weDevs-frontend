@@ -54,8 +54,7 @@ const EditOrder = () => {
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (form.status.length) {
-            dispatch(updateAdminOrder(form))
-            history.push('/admin/orders')
+            dispatch(updateAdminOrder(form, () => history.push('/admin/orders')))
         } else {
             dispatch(toggleNotification({
                 type: 'error',

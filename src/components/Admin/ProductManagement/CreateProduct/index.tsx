@@ -15,6 +15,7 @@ type ProductFormType = {
     price: string,
     description: string,
     category_id: string,
+    category_name: string,
     image: string
 }
 
@@ -29,6 +30,7 @@ const CreateProduct = () => {
         price: '',
         description: '',
         category_id: '',
+        category_name: '',
         image: ''
     })
 
@@ -48,14 +50,14 @@ const CreateProduct = () => {
     const categoryChangeHandler = (value: any) => {
         setForm({
             ...form,
-            category_id: value.id
+            category_id: value.id,
+            category_name: value.name
         })
     }
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (form.name.length && form.price.length && form.description.length && form.category_id !== '') {
-            dispatch(createAdminProduct(form))
-            history.push('/admin/products')
+            dispatch(createAdminProduct(form, () => history.push('/admin/products')))
         } else {
             dispatch(toggleNotification({
                 type: 'error',

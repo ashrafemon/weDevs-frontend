@@ -14,6 +14,7 @@ const initialState: StateType = {
         name: '',
         sku: '',
         category_id: '',
+        category_name: '',
         price: '',
         image: ''
     },

@@ -9,6 +9,8 @@ import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 import AddIcon from '@material-ui/icons/Add';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import CategoryIcon from '@material-ui/icons/Category';
+import {useDispatch} from "react-redux";
+import {logout} from "../../../../store/actions/auth/action";
 
 const useStyles = makeStyles(theme => ({
     innerListItem: {
@@ -19,11 +21,16 @@ const useStyles = makeStyles(theme => ({
 const SideNav = () => {
     const classes = useStyles()
     const history = useHistory()
+    const dispatch = useDispatch()
     const [open, setOpen] = React.useState(true);
 
     const handleClick = () => {
         setOpen(!open);
     };
+
+    const logoutHandler = () => {
+        dispatch(logout(() => history.replace('/login')))
+    }
 
     return (
         <List
@@ -102,7 +109,7 @@ const SideNav = () => {
                 </ListItemIcon>
                 <ListItemText primary="Orders"/>
             </ListItem>
-            <ListItem button>
+            <ListItem button onClick={logoutHandler}>
                 <ListItemIcon>
                     <ExitToAppIcon/>
                 </ListItemIcon>

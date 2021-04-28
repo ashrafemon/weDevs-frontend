@@ -61,6 +61,7 @@ const Products = () => {
                                     <TableCell>No.</TableCell>
                                     <TableCell>Name</TableCell>
                                     <TableCell>SKU</TableCell>
+                                    <TableCell>Category</TableCell>
                                     <TableCell>Price</TableCell>
                                     <TableCell align="center">Action</TableCell>
                                 </TableRow>
@@ -71,6 +72,7 @@ const Products = () => {
                                         <TableCell>{index + 1}</TableCell>
                                         <TableCell>{item.name}</TableCell>
                                         <TableCell>{item.sku}</TableCell>
+                                        <TableCell>{item.category_name}</TableCell>
                                         <TableCell>{item.price}</TableCell>
                                         <TableCell align="center">
                                             <IconButton onClick={quickViewHandler.bind(this, item.id)}>
@@ -89,7 +91,6 @@ const Products = () => {
                                         <TableCell colSpan={5} align="center">No products found...</TableCell>
                                     </TableRow>
                                 )}
-
                             </TableBody>
                         </Table>
                     </TableContainer>

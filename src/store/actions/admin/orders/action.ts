@@ -38,7 +38,8 @@ export const fetchAdminOrder = (id: number) => (dispatch: Function) => {
         })
         .catch(err => console.log(err))
 }
-export const updateAdminOrder = (data: any) => (dispatch: Function) => {
+export const updateAdminOrder = (data: any, cb: Function = () => {
+}) => (dispatch: Function) => {
     fetch(api_url + 'admin/orders/edit', {
         method: 'PATCH',
         headers: {
@@ -55,6 +56,7 @@ export const updateAdminOrder = (data: any) => (dispatch: Function) => {
                     text: res.message,
                     show: true
                 }))
+                cb()
             }
         })
         .catch(err => console.log(err))

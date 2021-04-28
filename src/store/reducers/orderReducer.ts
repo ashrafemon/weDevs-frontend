@@ -1,14 +1,12 @@
-import * as types from './../actions/orders/types'
-
 type Order = {
     id: number,
-    name: string,
-    sku: string,
-    category: string,
-    price: string,
-    image: string,
-    user: string,
-    status: string
+    user_id: string,
+    user_name: string,
+    user_email: string,
+    product_id: string,
+    product_name: string,
+    quantity: string,
+    price: string
 }
 
 interface StateType {
@@ -19,33 +17,19 @@ interface StateType {
 const initialState: StateType = {
     orders: [],
     order: {
-        id: 1,
-        name: '',
-        sku: '',
-        category: '',
-        price: '',
-        image: '',
-        user: '',
-        status: ''
+        id: 0,
+        user_id: '',
+        user_name: '',
+        user_email: '',
+        product_id: '',
+        product_name: '',
+        quantity: '',
+        price: ''
     },
 }
 
 const orderReducer = (state = initialState, action: any) => {
     switch (action.type) {
-        case types.FETCH_ORDERS:
-            return {
-                ...state,
-                orders: action.payload
-            }
-        case types.FETCH_ORDER:
-            return {
-                ...state,
-                order: action.payload
-            }
-        case types.DELETE_ORDER:
-            return {
-                ...state,
-            }
         default:
             return state
     }

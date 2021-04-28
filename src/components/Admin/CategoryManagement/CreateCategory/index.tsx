@@ -24,8 +24,8 @@ const CreateCategory = () => {
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (form.name.length > 3) {
-            dispatch(createAdminCategory(form))
-            history.push('/admin/categories')
+            dispatch(createAdminCategory(form, () => history.push('/admin/categories')))
+
         } else {
             dispatch(toggleNotification({
                 type: 'error',

@@ -35,7 +35,8 @@ export const fetchAdminCategory = (id: number) => (dispatch: Function) => {
         })
         .catch(err => console.log(err))
 }
-export const createAdminCategory = (data: any) => (dispatch: Function) => {
+export const createAdminCategory = (data: any, cb: Function = () => {
+}) => (dispatch: Function) => {
     fetch(api_url + 'admin/categories', {
         method: 'POST',
         headers: {
@@ -52,11 +53,13 @@ export const createAdminCategory = (data: any) => (dispatch: Function) => {
                     text: res.message,
                     show: true
                 }))
+                cb()
             }
         })
         .catch(err => console.log(err))
 }
-export const updateAdminCategory = (data: any) => (dispatch: Function) => {
+export const updateAdminCategory = (data: any, cb: Function = () => {
+}) => (dispatch: Function) => {
     fetch(api_url + 'admin/categories/edit', {
         method: 'PATCH',
         headers: {
@@ -73,6 +76,7 @@ export const updateAdminCategory = (data: any) => (dispatch: Function) => {
                     text: res.message,
                     show: true
                 }))
+                cb()
             }
         })
         .catch(err => console.log(err))

@@ -5,10 +5,13 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 
 type IProps = {
     label: string,
-    fullWidth: boolean
+    fullWidth: boolean,
+    name?: string,
+    value?: string,
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const PasswordBox: React.FC<IProps> = ({label, fullWidth}) => {
+const PasswordBox: React.FC<IProps> = ({label, fullWidth, value, onChange, name}) => {
     const classes = useStyles()
 
     const [show, setShow] = useState(false)
@@ -21,7 +24,10 @@ const PasswordBox: React.FC<IProps> = ({label, fullWidth}) => {
             <TextField
                 label={label}
                 type={!show ? 'password' : 'text'}
+                name={name}
                 fullWidth={fullWidth}
+                value={value}
+                onChange={onChange}
             />
             <IconButton className={classes.btn} onClick={showHandler}>
                 <VisibilityIcon/>

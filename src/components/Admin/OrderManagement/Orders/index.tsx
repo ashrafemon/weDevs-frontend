@@ -60,8 +60,8 @@ const Orders = () => {
                                 {orders.length ? orders.map((item: OrderType, index: number) => (
                                     <TableRow key={index}>
                                         <TableCell>{index + 1}</TableCell>
-                                        <TableCell>{item.product_id}</TableCell>
-                                        <TableCell>{item.user_id}</TableCell>
+                                        <TableCell>{item.product_name}</TableCell>
+                                        <TableCell>{item.user_name} ({item.user_email})</TableCell>
                                         <TableCell>{item.quantity}</TableCell>
                                         <TableCell>{item.price}</TableCell>
                                         <TableCell>{item.status}</TableCell>
