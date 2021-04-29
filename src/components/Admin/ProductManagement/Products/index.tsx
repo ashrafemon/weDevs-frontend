@@ -28,7 +28,7 @@ import {ProductType} from '../../../../types';
 import ProductDialog from "./ProductDialog";
 import {useHistory} from "react-router-dom";
 
-const Products = () => {
+const Products: React.FC = () => {
     const classes = useStyles()
     const history = useHistory()
     const dispatch = useDispatch()

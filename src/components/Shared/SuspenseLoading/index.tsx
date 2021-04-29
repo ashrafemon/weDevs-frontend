@@ -3,7 +3,7 @@ import {Box} from "@material-ui/core";
 import SpinnerGif from './../../../assets/suspens-loading.gif'
 import {useStyles} from "./styled";
 
-const SuspenseLoading = () => {
+const SuspenseLoading: React.FC = () => {
     const classes = useStyles()
 
     return (

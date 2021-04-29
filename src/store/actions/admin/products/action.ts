@@ -98,6 +98,12 @@ export const updateAdminProduct = (data: any, cb: Function = () => {
                     show: true
                 }))
                 cb()
+            } else if (res.status === 'error') {
+                dispatch(toggleNotification({
+                    type: 'error',
+                    text: res.message,
+                    show: true
+                }))
             }
         })
         .catch(err => console.log(err))

@@ -21,7 +21,7 @@ import {CategoryType} from '../../../../types';
 import {deleteAdminCategory, fetchAdminCategories} from "../../../../store/actions/admin/category/action";
 import {useHistory} from "react-router-dom";
 
-const Categories = () => {
+const Categories: React.FC = () => {
     const classes = useStyles()
     const history = useHistory()
     const dispatch = useDispatch()

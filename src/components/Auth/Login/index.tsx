@@ -7,11 +7,7 @@ import {Box, Card, CardContent, TextField, Typography} from "@material-ui/core";
 import PasswordBox from "../../Shared/PasswordBox";
 import {useDispatch} from "react-redux";
 import {login, toggleNotification} from "../../../store/actions/auth/action";
-
-type LoginFormType = {
-    email: string,
-    password: string
-}
+import { LoginFormType } from '../../../types';
 
 const Login: React.FC = () => {
     const classes = useStyles()
@@ -50,7 +46,7 @@ const Login: React.FC = () => {
                         <StorefrontIcon/>
                     </Box>
 
-                    <form method="POST" onSubmit={submitHandler}>
+                    <form method="post" onSubmit={submitHandler}>
                         <Box mb={2}>
                             <TextField
                                 name="email"

@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const SideNav = () => {
+const SideNav: React.FC = () => {
     const classes = useStyles()
     const history = useHistory()
     const dispatch = useDispatch()

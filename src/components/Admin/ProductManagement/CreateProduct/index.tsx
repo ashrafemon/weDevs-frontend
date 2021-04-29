@@ -9,9 +9,9 @@ import {fetchAdminCategories} from "../../../../store/actions/admin/category/act
 import {createAdminProduct, uploadAdminProductImage} from "../../../../store/actions/admin/products/action";
 import {toggleNotification} from "../../../../store/actions/auth/action";
 import {useHistory} from "react-router-dom";
-import { ProductFormType } from "../../../../types";
+import {ProductFormType} from "../../../../types";
 
-const CreateProduct = () => {
+const CreateProduct: React.FC = () => {
     const classes = useStyles()
     const history = useHistory()
     const dispatch = useDispatch()
@@ -40,6 +40,7 @@ const CreateProduct = () => {
                 image: image_url
             })
         }
+        // eslint-disable-next-line
     }, [image_url])
 
     const inputRefClickHandler = () => {

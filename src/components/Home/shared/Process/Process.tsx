@@ -8,13 +8,13 @@ type ISteps = {
     title: string
 }
 
-const Process = () => {
+const Process: React.FC = () => {
     const classes = useStyles()
 
     const [steps] = useState<ISteps[]>([
         {
             img: 'https://cdn.shopify.com/s/files/1/0752/0983/files/icon-01_2048x.png?v=1602181639',
-            title: 'Choose Fruits',
+            title: 'Choose Product',
         },
         {
             img: 'https://cdn.shopify.com/s/files/1/0752/0983/files/icon-02_2048x.png?v=1602181694',

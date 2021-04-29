@@ -7,7 +7,7 @@ import {toggleNotification} from "../../../../store/actions/auth/action";
 import {useHistory} from "react-router-dom";
 import {CategoryFormType} from "../../../../types";
 
-const CreateCategory = () => {
+const CreateCategory: React.FC = () => {
     const history = useHistory()
     const dispatch = useDispatch()
     const [form, setForm] = useState<CategoryFormType>({name: ''})

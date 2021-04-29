@@ -7,12 +7,7 @@ import {useStyles} from "../styled";
 import PasswordBox from "../../Shared/PasswordBox";
 import {useDispatch} from "react-redux";
 import {register, toggleNotification} from "../../../store/actions/auth/action";
-
-type RegisterFormType = {
-    name: string,
-    email: string,
-    password: string
-}
+import { RegisterFormType } from '../../../types';
 
 const Register: React.FC = () => {
     const classes = useStyles()

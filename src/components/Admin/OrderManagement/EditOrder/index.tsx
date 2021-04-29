@@ -8,7 +8,7 @@ import {fetchAdminOrder, updateAdminOrder} from "../../../../store/actions/admin
 import {Autocomplete} from "@material-ui/lab";
 import {OrderFormType, OrderParamType} from "../../../../types";
 
-const EditOrder = () => {
+const EditOrder: React.FC = () => {
     const params = useParams<OrderParamType>()
     const history = useHistory()
     const dispatch = useDispatch()

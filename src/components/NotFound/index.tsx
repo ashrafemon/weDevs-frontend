@@ -2,7 +2,7 @@ import React from "react";
 import {Box, Typography} from "@material-ui/core";
 import {useStyles} from "./styled";
 
-const NotFound = () => {
+const NotFound: React.FC = () => {
     const classes = useStyles()
     return (
         <Box className={classes.wrapper}>

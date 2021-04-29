@@ -1,6 +1,7 @@
 import React from "react";
+import {RouteType} from "../types";
 
-const routes = [
+const routes: RouteType[] = [
     {
         path: '/login',
         exact: true,

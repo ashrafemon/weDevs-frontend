@@ -1,7 +1,7 @@
 import React from "react";
 import {AppBar, Toolbar, Typography} from "@material-ui/core";
 
-const AdminNavbar = () => {
+const AdminNavbar: React.FC = () => {
     return (
         <AppBar position="static">
             <Toolbar>

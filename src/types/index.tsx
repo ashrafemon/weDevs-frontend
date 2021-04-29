@@ -1,3 +1,25 @@
+// RouteType
+import React from "react";
+
+export type RouteType = {
+    path: string,
+    exact: boolean,
+    requiresAuth: boolean,
+    component: React.Component | any,
+}
+
+// AuthType
+export type LoginFormType = {
+    email: string,
+    password: string
+}
+
+export type RegisterFormType = {
+    name: string,
+    email: string,
+    password: string
+}
+
 // CategoryType
 export type CategoryType = {
     id: number,

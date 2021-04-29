@@ -15,7 +15,7 @@ import {toggleNotification} from "../../../../store/actions/auth/action";
 import {useHistory, useParams} from "react-router-dom";
 import {ProductFormType, ProductParamType} from "../../../../types";
 
-const EditProduct = () => {
+const EditProduct: React.FC = () => {
     const classes = useStyles()
     const params = useParams<ProductParamType>()
     const history = useHistory()
@@ -43,9 +43,10 @@ const EditProduct = () => {
 
     useEffect(() => {
         setForm(product)
-        if (product.image.length) {
+        if (product.image) {
             setPreviewImage(product.image)
         }
+        // eslint-disable-next-line
     }, [product])
 
     useEffect(() => {
@@ -56,6 +57,7 @@ const EditProduct = () => {
                 image: image_url
             })
         }
+        // eslint-disable-next-line
     }, [image_url])
 
     const inputRefClickHandler = () => {

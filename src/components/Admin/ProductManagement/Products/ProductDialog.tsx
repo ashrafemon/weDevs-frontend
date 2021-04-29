@@ -25,7 +25,7 @@ const ProductDialog = () => {
                         <Grid item sm={4} xs={12}>
                             <img
                                 className={classes.productImage}
-                                src={product.image.length ? product.image : DefaultImage}
+                                src={product.image ? product.image : DefaultImage}
                                 alt="Default"
                             />
                         </Grid>

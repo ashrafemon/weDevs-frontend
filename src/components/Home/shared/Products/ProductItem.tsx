@@ -31,7 +31,7 @@ const ProductItem: React.FC<IProps> = ({item}) => {
                 <Box className={classes.productCardMediaBox}>
                     <img
                         className={classes.productCardMedia}
-                        src={item.image !== '' ? item.image : DefaultImage}
+                        src={item.image ? item.image : DefaultImage}
                         alt="Item"
                     />
 

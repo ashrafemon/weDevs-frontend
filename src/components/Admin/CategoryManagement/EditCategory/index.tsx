@@ -7,7 +7,7 @@ import {useHistory, useParams} from 'react-router-dom'
 import {toggleNotification} from "../../../../store/actions/auth/action";
 import {CategoryFormType, CategoryParamType} from "../../../../types";
 
-const EditCategory = () => {
+const EditCategory: React.FC = () => {
     const params = useParams<CategoryParamType>()
     const history = useHistory()
     const dispatch = useDispatch()

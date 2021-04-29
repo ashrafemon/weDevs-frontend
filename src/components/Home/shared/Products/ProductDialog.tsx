@@ -9,7 +9,7 @@ import {createOrder} from "../../../../store/actions/orders/action";
 import {toggleNotification} from "../../../../store/actions/auth/action";
 import {OrderPlaceFormType} from "../../../../types";
 
-const ProductDialog = () => {
+const ProductDialog: React.FC = () => {
     const classes = useStyles()
     const dispatch = useDispatch()
     const product = useSelector((state: RootStateOrAny) => state.productStore.product)
@@ -31,6 +31,7 @@ const ProductDialog = () => {
                 product_name: product.name,
             })
         }
+        // eslint-disable-next-line
     }, [product])
 
     const dialogCloseHandler = () => {
@@ -73,7 +74,7 @@ const ProductDialog = () => {
                         <Grid item sm={6} xs={12}>
                             <img
                                 className={classes.productCardMedia}
-                                src={product.image !== '' ? product.image : DefaultImage}
+                                src={product.image ? product.image : DefaultImage}
                                 alt="Item"
                             />
                         </Grid>

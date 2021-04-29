@@ -60,7 +60,7 @@ const App: React.FC = () => {
                     autoHideDuration={4000}
                     onClose={closeAlertHandler}
                 >
-                    <Alert severity={notification.type}>
+                    <Alert severity={notification.type === 'success' ? 'success' : 'error'}>
                         <Typography>{notification.text}</Typography>
                     </Alert>
                 </Snackbar>

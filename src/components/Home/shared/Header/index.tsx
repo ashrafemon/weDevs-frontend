@@ -5,7 +5,7 @@ import {Link, useHistory} from 'react-router-dom'
 import {useDispatch} from "react-redux";
 import {logout} from "../../../../store/actions/auth/action";
 
-const Header = () => {
+const Header: React.FC = () => {
     const classes = useStyles()
     const history = useHistory()
     const dispatch = useDispatch()

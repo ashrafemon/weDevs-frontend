@@ -21,7 +21,7 @@ import {deleteAdminOrder, fetchAdminOrders} from "../../../../store/actions/admi
 import {OrderType} from "../../../../types";
 import {useHistory} from "react-router-dom";
 
-const Orders = () => {
+const Orders: React.FC = () => {
     const classes = useStyles()
     const history = useHistory()
     const dispatch = useDispatch()
