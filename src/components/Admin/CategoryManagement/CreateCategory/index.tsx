@@ -5,10 +5,7 @@ import {useDispatch} from "react-redux";
 import {createAdminCategory} from "../../../../store/actions/admin/category/action";
 import {toggleNotification} from "../../../../store/actions/auth/action";
 import {useHistory} from "react-router-dom";
-
-type CategoryFormType = {
-    name: string,
-}
+import {CategoryFormType} from "../../../../types";
 
 const CreateCategory = () => {
     const history = useHistory()
@@ -23,7 +20,7 @@ const CreateCategory = () => {
     }
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if (form.name.length > 3) {
+        if (form.name.length >= 3) {
             dispatch(createAdminCategory(form, () => history.push('/admin/categories')))
 
         } else {
@@ -51,6 +48,7 @@ const CreateCategory = () => {
                                 name="name"
                                 fullWidth
                                 onChange={inputChangeHandler}
+                                helperText="Minimum 3 characters Required"
                             />
                         </Box>
 

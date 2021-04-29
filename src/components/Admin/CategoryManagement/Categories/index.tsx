@@ -25,7 +25,6 @@ const Categories = () => {
     const classes = useStyles()
     const history = useHistory()
     const dispatch = useDispatch()
-
     const categories = useSelector((state: RootStateOrAny) => state.adminCategoryStore.categories)
 
     useEffect(() => {
@@ -35,7 +34,6 @@ const Categories = () => {
     const editHandler = (id: number) => {
         history.push(`/admin/categories/${id}/edit`)
     }
-
     const deleteHandler = (id: number) => {
         dispatch(deleteAdminCategory(id))
     }

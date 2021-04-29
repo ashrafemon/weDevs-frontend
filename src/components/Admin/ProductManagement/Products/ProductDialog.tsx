@@ -23,7 +23,11 @@ const ProductDialog = () => {
                 {Object.keys(product).length && (
                     <Grid container spacing={1} alignItems="center">
                         <Grid item sm={4} xs={12}>
-                            <img className={classes.productImage} src={DefaultImage} alt="Default"/>
+                            <img
+                                className={classes.productImage}
+                                src={product.image.length ? product.image : DefaultImage}
+                                alt="Default"
+                            />
                         </Grid>
                         <Grid item sm={8} xs={12}>
                             <Typography><strong>Name:</strong> {product.name}</Typography>

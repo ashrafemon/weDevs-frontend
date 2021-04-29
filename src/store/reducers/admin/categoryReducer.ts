@@ -1,20 +1,12 @@
 import * as types from './../../actions/admin/category/types'
+import {CategoryStateType} from "../../../types";
 
-type CategoryType = {
-    id: number,
-    name: string
-}
-
-interface StateType {
-    categories: CategoryType[],
-    category: CategoryType
-}
-
-const initialState: StateType = {
+const initialState: CategoryStateType = {
     categories: [],
     category: {
         id: 0,
-        name: ''
+        name: '',
+        status: ''
     }
 }
 

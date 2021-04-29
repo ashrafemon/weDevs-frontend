@@ -39,6 +39,23 @@ export const fetchAdminProduct = (id: number) => (dispatch: Function) => {
         })
         .catch(err => console.log(err))
 }
+export const uploadAdminProductImage = (data: any) => (dispatch: Function) => {
+    let formData = new FormData()
+    formData.append('image', data)
+
+    fetch(api_url + 'admin/products/upload_image', {
+        method: 'POST',
+        body: formData
+    })
+        .then(res => res.json())
+        .then(res => {
+            console.log(res)
+            if (res.status === 'done') {
+                dispatch({type: types.UPLOAD_ADMIN_PRODUCT_IMAGE, payload: res.image_url})
+            }
+        })
+        .catch(err => console.log(err))
+}
 export const createAdminProduct = (data: any, cb: Function = () => {
 }) => (dispatch: Function) => {
     fetch(api_url + 'admin/products', {

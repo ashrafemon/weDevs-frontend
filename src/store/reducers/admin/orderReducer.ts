@@ -1,25 +1,16 @@
 import * as types from './../../actions/admin/orders/types'
+import {OrderStateType} from "../../../types";
 
-type Order = {
-    id: number,
-    product_id: string,
-    user_id: string,
-    quantity: string,
-    price: string,
-    status: string,
-}
-
-interface StateType {
-    orders: Order[];
-    order: Order;
-}
-
-const initialState: StateType = {
+const initialState: OrderStateType = {
     orders: [],
     order: {
         id: 0,
         product_id: '',
+        product_name: '',
         user_id: '',
+        user_name: '',
+        user_email: '',
+        shipping_address: '',
         quantity: '',
         price: '',
         status: '',

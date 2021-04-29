@@ -6,29 +6,22 @@ import {useHistory, useParams} from 'react-router-dom'
 import {toggleNotification} from "../../../../store/actions/auth/action";
 import {fetchAdminOrder, updateAdminOrder} from "../../../../store/actions/admin/orders/action";
 import {Autocomplete} from "@material-ui/lab";
-
-type OrderFormType = {
-    user_id: string,
-    product_id: string,
-    quantity: string,
-    price: string,
-    status: string
-}
-
-type CategoryParamType = {
-    id: string
-}
+import {OrderFormType, OrderParamType} from "../../../../types";
 
 const EditOrder = () => {
-    const params = useParams<CategoryParamType>()
+    const params = useParams<OrderParamType>()
     const history = useHistory()
     const dispatch = useDispatch()
     const [form, setForm] = useState<OrderFormType>({
         user_id: '',
         product_id: '',
+        product_name: '',
+        user_name: '',
+        user_email: '',
+        shipping_address: '',
         quantity: '',
         price: '',
-        status: ''
+        status: '',
     })
     const order = useSelector((state: RootStateOrAny) => state.adminOrderStore.order)
     const [statuses] = useState(['processing', 'shipped', 'delivered'])
@@ -44,7 +37,6 @@ const EditOrder = () => {
     }, [order])
 
     const statusChangeHandler = (value: any) => {
-        console.log(value)
         setForm({
             ...form,
             status: value

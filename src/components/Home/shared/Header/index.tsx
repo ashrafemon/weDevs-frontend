@@ -17,7 +17,7 @@ const Header = () => {
     return (
         <Box className={classes.wrapper}>
             <Typography className={classes.brand}>
-                <Link to="/">Company</Link>
+                <Link to="/">weDevs Store</Link>
             </Typography>
             <Nav>
                 <NavItem>

@@ -10,7 +10,7 @@ import AddIcon from '@material-ui/icons/Add';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import CategoryIcon from '@material-ui/icons/Category';
 import {useDispatch} from "react-redux";
-import {logout} from "../../../../store/actions/auth/action";
+import {logout} from "../../../../../store/actions/auth/action";
 
 const useStyles = makeStyles(theme => ({
     innerListItem: {

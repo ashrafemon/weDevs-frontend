@@ -6,22 +6,14 @@ import {useStyles} from "./styled";
 import DefaultImage from './../../../../assets/default-image.jpg'
 import {RootStateOrAny, useDispatch, useSelector} from "react-redux";
 import {fetchAdminCategories} from "../../../../store/actions/admin/category/action";
-import {fetchAdminProduct, updateAdminProduct} from "../../../../store/actions/admin/products/action";
+import {
+    fetchAdminProduct,
+    updateAdminProduct,
+    uploadAdminProductImage
+} from "../../../../store/actions/admin/products/action";
 import {toggleNotification} from "../../../../store/actions/auth/action";
 import {useHistory, useParams} from "react-router-dom";
-
-type ProductFormType = {
-    name: string,
-    price: string,
-    description: string,
-    category_id: string,
-    category_name: string,
-    image: string
-}
-
-type ProductParamType = {
-    id: string
-}
+import {ProductFormType, ProductParamType} from "../../../../types";
 
 const EditProduct = () => {
     const classes = useStyles()
@@ -31,6 +23,7 @@ const EditProduct = () => {
     const inputRef = useRef<HTMLInputElement>(null)
     const categories = useSelector((state: RootStateOrAny) => state.adminCategoryStore.categories)
     const product = useSelector((state: RootStateOrAny) => state.adminProductStore.product)
+    const image_url = useSelector((state: RootStateOrAny) => state.adminProductStore.image_url)
     const [form, setForm] = useState<ProductFormType>({
         name: '',
         price: '',
@@ -39,6 +32,7 @@ const EditProduct = () => {
         category_name: '',
         image: ''
     })
+    const [previewImage, setPreviewImage] = useState<string | any>('')
 
     useEffect(() => {
         if (params.id) {
@@ -49,7 +43,20 @@ const EditProduct = () => {
 
     useEffect(() => {
         setForm(product)
+        if (product.image.length) {
+            setPreviewImage(product.image)
+        }
     }, [product])
+
+    useEffect(() => {
+        if (image_url.length) {
+            setPreviewImage(image_url)
+            setForm({
+                ...form,
+                image: image_url
+            })
+        }
+    }, [image_url])
 
     const inputRefClickHandler = () => {
         inputRef.current?.click()
@@ -59,6 +66,13 @@ const EditProduct = () => {
             ...form,
             [e.target.name]: e.target.value
         })
+    }
+    const imageChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let files: any = e.target.files
+
+        if (files.length) {
+            dispatch(uploadAdminProductImage(files[0]))
+        }
     }
     const categoryChangeHandler = (value: any) => {
         setForm({
@@ -98,6 +112,7 @@ const EditProduct = () => {
                                         name="name"
                                         fullWidth
                                         onChange={inputChangeHandler}
+                                        helperText="Required*"
                                     />
                                 </Box>
                                 <Box mb={2}>
@@ -107,6 +122,7 @@ const EditProduct = () => {
                                         name="price"
                                         fullWidth
                                         onChange={inputChangeHandler}
+                                        helperText="Required*"
                                     />
                                 </Box>
                                 <Box mb={2}>
@@ -115,6 +131,7 @@ const EditProduct = () => {
                                         value={form.description}
                                         name="description"
                                         onChange={inputChangeHandler}
+                                        helperText="Required*"
                                         fullWidth
                                         multiline
                                         rows={5}
@@ -128,7 +145,7 @@ const EditProduct = () => {
                                         fullWidth
                                         onChange={(e, value) => categoryChangeHandler(value)}
                                         renderInput={(params) =>
-                                            <TextField {...params} label="Category"/>
+                                            <TextField {...params} label="Category" helperText="Required*"/>
                                         }
                                     />
                                 </Box>
@@ -136,11 +153,16 @@ const EditProduct = () => {
 
                             <Grid item sm={4} xs={12}>
                                 <Box mb={2}>
-                                    <img src={DefaultImage} alt="Default" className={classes.uploadImage}/>
+                                    <img
+                                        src={previewImage ? previewImage : DefaultImage}
+                                        alt="Default"
+                                        className={classes.uploadImage}
+                                    />
                                     <input
                                         ref={inputRef}
                                         type="file"
                                         className={classes.fileInput}
+                                        onChange={imageChangeHandler}
                                     />
                                     <Button
                                         type="button"

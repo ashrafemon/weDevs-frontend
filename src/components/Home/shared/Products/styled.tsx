@@ -61,7 +61,9 @@ export const useStyles = makeStyles(() => ({
     },
     productCardMedia: {
         width: '100%',
+        maxHeight: 500,
         objectFit: 'contain',
+        boxShadow: '0 0 5px 2px #ededed'
     },
     productCardMediaActionBox: {
         position: 'absolute',

@@ -5,7 +5,7 @@ const AdminNavbar = () => {
     return (
         <AppBar position="static">
             <Toolbar>
-                <Typography>weDevs Store</Typography>
+                <Typography>weDevs Store Admin Panel</Typography>
             </Toolbar>
         </AppBar>
     )

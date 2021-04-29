@@ -5,14 +5,7 @@ import {RootStateOrAny, useDispatch, useSelector} from "react-redux";
 import {fetchAdminCategory, updateAdminCategory} from "../../../../store/actions/admin/category/action";
 import {useHistory, useParams} from 'react-router-dom'
 import {toggleNotification} from "../../../../store/actions/auth/action";
-
-type CategoryFormType = {
-    name: string,
-}
-
-type CategoryParamType = {
-    id: string
-}
+import {CategoryFormType, CategoryParamType} from "../../../../types";
 
 const EditCategory = () => {
     const params = useParams<CategoryParamType>()
@@ -39,7 +32,7 @@ const EditCategory = () => {
     }
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if (form.name.length > 3) {
+        if (form.name.length >= 3) {
             dispatch(updateAdminCategory(form, () => history.push('/admin/categories')))
 
         } else {
@@ -67,6 +60,7 @@ const EditCategory = () => {
                                 name="name"
                                 fullWidth
                                 onChange={inputChangeHandler}
+                                helperText="Minimum 3 characters Required"
                             />
                         </Box>
 

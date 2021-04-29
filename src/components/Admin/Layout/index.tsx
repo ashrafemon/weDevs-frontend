@@ -1,8 +1,8 @@
 import React from "react";
 import {Box, Grid} from "@material-ui/core";
 import {useStyles} from "./styled";
-import SideNav from "../shared/SideNav";
-import AdminNavbar from "../shared/AdminNavbar";
+import SideNav from "./shared/SideNav";
+import AdminNavbar from "./shared/AdminNavbar";
 
 type IProps = {
     children: React.ReactNode

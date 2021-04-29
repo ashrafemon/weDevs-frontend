@@ -1,13 +1,7 @@
 import * as types from './../../actions/admin/products/types'
-import {ProductType} from "../../../types";
+import {ProductStateType} from "../../../types";
 
-interface StateType {
-    products: ProductType[];
-    product: ProductType;
-    showDialog: boolean;
-}
-
-const initialState: StateType = {
+const initialState: ProductStateType = {
     products: [],
     product: {
         id: 0,
@@ -18,6 +12,7 @@ const initialState: StateType = {
         price: '',
         image: ''
     },
+    image_url: '',
     showDialog: false
 }
 
@@ -32,6 +27,11 @@ const adminProductReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 product: action.payload
+            }
+        case types.UPLOAD_ADMIN_PRODUCT_IMAGE:
+            return {
+                ...state,
+                image_url: action.payload
             }
         case types.CREATE_ADMIN_PRODUCT:
             return {
